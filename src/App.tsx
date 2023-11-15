@@ -1,26 +1,94 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState, useEffect, useMemo} from "react";
+import "./App.scss";
 
-function App() {
+type Country = {
+  name: string;
+  code: string;
+};
+
+const App: React.FC = () => {
+  const [countries, setCountries] = useState<Country[]>([]);
+  const [filter, setFilter] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch("https://countries.trevorblades.com/", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+          query: `
+            query {
+              countries {
+                name
+                code
+              }
+            }
+          `,
+        }),
+      });
+
+      const result = await response.json();
+      setCountries(result.data.countries);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      setError("Error fetching data. Please try again.");
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const filteredCountries = useMemo(() => {
+    return countries.filter((country) =>
+        country.code.toLowerCase().includes(filter.toLowerCase()),
+    );
+  }, [countries, filter]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="countries-container">
+        <span className="countries-container__title">Countries</span>
+        <input
+            type="text"
+            className="countries-container__filter-input"
+            placeholder="Filter by country code"
+            value={filter}
+            onChange={(e) => setFilter(e.target.value)}
+        />
+
+        {loading && <p className="countries-container__loading">Loading...</p>}
+        {error && <p className="countries-container__error">{error}</p>}
+
+        {!loading && !error ? (
+            filteredCountries.length ? (
+                <table className="countries-container__table">
+                  <thead>
+                  <tr>
+                    <th>Country Name</th>
+                    <th>Country Code</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  {filteredCountries.map((country, index) => (
+                      <tr key={index} className="countries-container__row">
+                        <td>{country.name}</td>
+                        <td>{country.code}</td>
+                      </tr>
+                  ))}
+                  </tbody>
+                </table>
+            ) : (
+                <div className="countries-container__no-results">
+                  No results found.
+                </div>
+            )
+        ) : null}
+      </div>
   );
-}
+};
 
 export default App;
