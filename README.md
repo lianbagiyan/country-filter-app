@@ -15,15 +15,20 @@ This React app fetches a list of countries from an external API and allows users
    ```bash
    git clone https://github.com/lianbagiyan/country-filter-app.git
 
+   ```
+
 2. **Navigate to the project directory:**
 
    ```bash
    cd country-filter-app
 
+   ```
+
 3. **Install dependencies:**
 
    ```bash
    npm install
+   ```
 
 ## Usage
 
@@ -31,6 +36,8 @@ This React app fetches a list of countries from an external API and allows users
 
    ```bash
    npm start
+
+   ```
 
 2. Open your browser and visit http://localhost:3000 to view the app.
 

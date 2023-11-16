@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchInput Component matches snapshot 1`] = `
+<div>
+  <input
+    class="filter-input"
+    placeholder="Filter by country code"
+    type="text"
+    value=""
+  />
+</div>
+`;

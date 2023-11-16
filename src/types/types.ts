@@ -1,13 +1,13 @@
 export type Country = {
-    name: string;
-    code: string;
+  name: string;
+  code: string;
 };
 
 export type CountryTableProps = {
-    data: Country[];
+  data: Country[];
 };
 
 export type SearchInputProps = {
-    value: string;
-    onChange: (value: string) => void;
+  value: string;
+  onChange: (value: string) => void;
 };
