@@ -16,7 +16,7 @@ const App: React.FC = () => {
     try {
       const response = await fetch("https://countries.trevorblades.com/", {
         method: "POST",
-        headers: {"Content-Type": "application/json"},
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           query: `
             query {
@@ -45,7 +45,7 @@ const App: React.FC = () => {
 
   const filteredCountries = useMemo(() => {
     return countries.filter((country) =>
-        country.code.toLowerCase().includes(filter.toLowerCase()),
+        country.code.toLowerCase().includes(filter.toLowerCase())
     );
   }, [countries, filter]);
 
@@ -63,32 +63,35 @@ const App: React.FC = () => {
         {loading && <p className="countries-container__loading">Loading...</p>}
         {error && <p className="countries-container__error">{error}</p>}
 
-        {!loading && !error ? (
-            filteredCountries.length ? (
-                <table className="countries-container__table">
-                  <thead>
-                  <tr>
-                    <th>Country Name</th>
-                    <th>Country Code</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  {filteredCountries.map((country, index) => (
-                      <tr key={index} className="countries-container__row">
+        {!loading && !error && (
+            <table className="countries-container__table">
+              <thead>
+              <tr>
+                <th>Country Name</th>
+                <th>Country Code</th>
+              </tr>
+              </thead>
+              <tbody>
+              {filteredCountries.length ? (
+                  filteredCountries.map((country) => (
+                      <tr key={country.code} className="countries-container__row">
                         <td>{country.name}</td>
                         <td>{country.code}</td>
                       </tr>
-                  ))}
-                  </tbody>
-                </table>
-            ) : (
-                <div className="countries-container__no-results">
-                  No results found.
-                </div>
-            )
-        ) : null}
+                  ))
+              ) : (
+                  <tr>
+                    <td colSpan={2} className="countries-container__no-results">
+                      No results found.
+                    </td>
+                  </tr>
+              )}
+              </tbody>
+            </table>
+        )}
       </div>
   );
 };
 
 export default App;
+

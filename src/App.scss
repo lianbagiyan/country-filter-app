@@ -48,6 +48,7 @@
         font-weight: 600;
         text-align: start;
         width: 70%;
+        box-shadow: 0px -1px 5px var(--gray);
 
         &:not(:first-child) {
           border-left: 1px solid var(--border);
@@ -89,6 +90,6 @@
 
   &__no-results {
     padding: 10px;
-    color: #787272;
+    color: var(--no-results);
   }
 }
