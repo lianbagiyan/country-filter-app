@@ -13,16 +13,6 @@
     font-size: 30px;
   }
 
-  &__filter-input {
-    width: 400px;
-    height: 30px;
-    padding-left: 10px;
-
-    &:focus {
-      outline: none;
-    }
-  }
-
   &__loading {
     color: var(--loading);
     letter-spacing: 2px;
@@ -31,65 +21,5 @@
   &__error {
     color: var(--error);
     letter-spacing: 2px;
-  }
-
-  &__table {
-    margin-top: 25px;
-    width: 65%;
-    border-collapse: collapse;
-
-    thead {
-      background: var(--background);
-      border-bottom: 1px solid var(--border);
-
-      th {
-        padding: 16px;
-        color: var(--gray-base);
-        font-weight: 600;
-        text-align: start;
-        width: 70%;
-        box-shadow: 0px -1px 5px var(--gray);
-
-        &:not(:first-child) {
-          border-left: 1px solid var(--border);
-          text-align: center;
-        }
-      }
-
-      tr {
-        height: 40px;
-      }
-    }
-
-    tbody {
-
-      tr {
-        border: 1px solid var(--white);
-
-        td {
-          height: 30px;
-
-          &:not(:first-child) {
-            color: var(--blue);
-            font-weight: 600;
-          }
-
-          &:nth-child(odd) {
-            padding-left: 16px;
-            background-color: var(--light-gray);
-          }
-
-          &:nth-child(even) {
-            text-align: center;
-            background-color: var(--dark-gray);
-          }
-        }
-      }
-    }
-  }
-
-  &__no-results {
-    padding: 10px;
-    color: var(--no-results);
   }
 }
